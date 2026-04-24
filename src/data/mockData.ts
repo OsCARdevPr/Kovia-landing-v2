@@ -41,7 +41,7 @@ export interface SocialLink {
 }
 
 export const AGENDAR_URL =
-  "https://calcom.oscardev.software/team/kovia-studios/agendar-cita";
+  "https://calcom.estudiokovia.com/team/kovia-studios/agendar-cita";
 
 export const TICKER_MESSAGE =
   "System Status: Optimized // Manual Latency Eliminator // Amp It Up Methodology v4.0 // Architecture > Marketing";
