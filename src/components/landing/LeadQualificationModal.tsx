@@ -5,7 +5,7 @@ const OPEN_FORM_EVENT = "kovia:open-lead-form";
 const CLOSE_FORM_EVENT = "kovia:close-lead-form";
 
 const EMBED_URL =
-  import.meta.env.PUBLIC_FORM_URL ?? "https://form.estudiokovia.com/lead-qualificator";
+  import.meta.env.PUBLIC_FORM_URL ?? "https://formulario.estudiokovia.com/lead-qualificator";
 
 const FORM_ALLOWED_ORIGIN = import.meta.env.PUBLIC_FORM_ALLOWED_ORIGIN;
 
