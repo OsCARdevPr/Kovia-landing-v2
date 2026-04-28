@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../components/layout/BaseLayout.astro";
+import LandingBackground from "../components/landing/LandingBackground.astro";
+import TopTicker from "../components/landing/TopTicker.astro";
+import { LandingNavbar } from "../components/landing/LandingNavbar";
+import { HeroSection } from "../components/landing/HeroSection";
+import { ChaosSection } from "../components/landing/ChaosSection";
+import { SocialProofSection } from "../components/landing/SocialProofSection";
+import { MethodSection } from "../components/landing/MethodSection";
+import { FinalCtaSection } from "../components/landing/FinalCtaSection";
+import { SiteFooter } from "../components/landing/SiteFooter";
+import { LeadQualificationModal } from "../components/landing/LeadQualificationModal";
+import {
+	NAVIGATION_LINKS,
+	TICKER_MESSAGE,
+} from "../data/mockData";
+---
+
+<BaseLayout title="Estudio Kovia">
+	<div class="min-h-screen selection:bg-kovia-red/30 selection:text-white overflow-x-hidden bg-grid-cyber">
+		<LandingBackground />
+		<TopTicker message={TICKER_MESSAGE} />
+
+		<LandingNavbar client:load links={NAVIGATION_LINKS} />
+		<HeroSection client:load />
+
+		<ChaosSection client:visible={{ rootMargin: "240px" }} />
+		<SocialProofSection client:visible={{ rootMargin: "220px" }} />
+		<MethodSection client:visible={{ rootMargin: "220px" }} />
+		<FinalCtaSection client:idle={{ timeout: 900 }} />
+		<SiteFooter />
+
+		<LeadQualificationModal client:load />
+	</div>
+</BaseLayout>

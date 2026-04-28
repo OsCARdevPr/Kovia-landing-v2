@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+@theme {
+	--color-kovia-dark: #090a0e;
+	--color-kovia-gold: #ffd700;
+	--color-kovia-red: #b12b24;
+
+	--font-brand: "Space Grotesk", sans-serif;
+	--font-mono: "JetBrains Mono", monospace;
+}
+
+@layer base {
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+	}
+
+	body {
+		@apply bg-kovia-dark text-slate-300 font-mono antialiased selection:bg-kovia-red/30 selection:text-white;
+	}
+}
+
+.glass-pane {
+	@apply bg-white/[0.02] backdrop-blur-xl border border-white/5 relative overflow-hidden;
+}
+
+.glass-pane::before {
+	content: "";
+	@apply absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent pointer-events-none;
+}
+
+.neon-border-red {
+	@apply border-kovia-red/30 shadow-[0_0_20px_rgba(177,43,36,0.1)];
+	box-shadow: inset 0 0 15px rgba(177, 43, 36, 0.05), 0 0 20px rgba(177, 43, 36, 0.1);
+}
+
+.text-glow-red {
+	text-shadow: 0 0 10px rgba(177, 43, 36, 0.5);
+}
+
+.kovia-btn-wrapper {
+	position: relative;
+	display: inline-flex;
+	transition: transform 0.2s ease;
+	vertical-align: middle;
+	isolation: isolate;
+}
+
+.kovia-btn-wrapper.w-full {
+	display: flex;
+}
+
+.kovia-btn-wrapper:hover {
+	transform: translateY(-1px) translateX(-1px);
+}
+
+.kovia-btn-wrapper:active {
+	transform: translate(2px, 2px);
+}
+
+.kovia-btn-wrapper:hover .kovia-btn-shadow {
+	transform: translate(6px, 6px);
+}
+
+.kovia-btn-wrapper:active .kovia-btn-shadow {
+	transform: translate(0, 0);
+}
+
+.kovia-btn-shadow {
+	position: absolute;
+	inset: 0;
+	background-color: #5a1410;
+	transform: translate(4px, 4px);
+	clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+	z-index: -1;
+	transition: transform 0.2s ease;
+}
+
+.kovia-btn-content {
+	position: relative;
+	z-index: 10;
+	width: 100%;
+	background-color: var(--color-kovia-red);
+	color: white;
+	padding: 0.85rem 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.75rem;
+	font-family: var(--font-brand);
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 14px;
+	letter-spacing: 0.1em;
+	clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+}
+
+.kovia-btn-content.btn-sm,
+.kovia-btn-shadow.btn-sm {
+	padding: 0.6rem 1.2rem;
+	font-size: 10px;
+	clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.bg-grid-cyber {
+	background-size: 60px 60px;
+	background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+		linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+.kv-noise-overlay {
+	opacity: 0.035;
+	mix-blend-mode: overlay;
+	background-image: radial-gradient(circle at 20% 25%, rgba(177, 43, 36, 0.2), transparent 42%),
+		radial-gradient(circle at 75% 70%, rgba(255, 255, 255, 0.12), transparent 45%);
+}
+
+@keyframes kvMarquee {
+	from {
+		transform: translateX(-50%);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+
+.kv-marquee-track {
+	display: flex;
+	width: max-content;
+	animation: kvMarquee 28s linear infinite;
+}
+
+.kv-marquee-content {
+	display: flex;
+	gap: 2.5rem;
+	padding-right: 2.5rem;
+	white-space: nowrap;
+}
+
+@keyframes kvGlowBreathe {
+	0% {
+		opacity: 0.75;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0.75;
+	}
+}
+
+.kv-hero-glow {
+	animation: kvGlowBreathe 6s ease-in-out infinite;
+	will-change: opacity;
+	contain: paint;
+}
+
+@keyframes scanline {
+	0% {
+		transform: translateY(-100%);
+	}
+	100% {
+		transform: translateY(100%);
+	}
+}
+
+.scanline::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(to bottom, transparent, rgba(177, 43, 36, 0.05), transparent);
+	height: 100px;
+	animation: scanline 8s linear infinite;
+	pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.kv-marquee-track,
+	.kv-hero-glow,
+	.scanline::after {
+		animation: none !important;
+	}
+
+	.kovia-btn-wrapper,
+	.kovia-btn-shadow {
+		transition: none !important;
+	}
+}

@@ -1,0 +1,81 @@
+---
+import { CONSENT_COPY } from "../../data/mockData";
+---
+
+<div
+  id="kovia-consent-banner"
+  class="fixed bottom-4 left-4 right-4 z-[110] hidden sm:bottom-6 sm:left-6 sm:right-auto sm:max-w-lg"
+  role="dialog"
+  aria-live="polite"
+  aria-label="Consentimiento de cookies"
+>
+  <div class="glass-pane neon-border-red rounded-2xl p-4 sm:p-5">
+    <div class="flex flex-col gap-4">
+      <div class="space-y-2">
+        <p class="font-brand text-sm sm:text-base font-semibold uppercase tracking-[0.15em] text-white">
+          {CONSENT_COPY.title}
+        </p>
+        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+          {CONSENT_COPY.description}
+        </p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
+        <button
+          type="button"
+          data-consent="reject"
+          class="inline-flex items-center justify-center rounded-full border border-white/10 px-4 py-2 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-slate-300 hover:text-white hover:border-white/30 transition"
+        >
+          {CONSENT_COPY.rejectLabel}
+        </button>
+        <button
+          type="button"
+          data-consent="accept"
+          class="inline-flex items-center justify-center rounded-full bg-kovia-red px-4 py-2 text-[10px] sm:text-xs font-brand font-bold uppercase tracking-widest text-white shadow-[0_0_18px_rgba(177,43,36,0.35)] transition hover:translate-y-[-1px]"
+        >
+          {CONSENT_COPY.acceptLabel}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const banner = document.getElementById("kovia-consent-banner");
+    if (!banner) {
+      return;
+    }
+
+    const storageKey = "kovia_consent_v1";
+    const existing = window.localStorage.getItem(storageKey);
+
+    if (existing) {
+      banner.remove();
+      return;
+    }
+
+    banner.classList.remove("hidden");
+
+    const pushConsent = (state) => {
+      window.dataLayer = window.dataLayer ?? [];
+      window.dataLayer.push({
+        event: "consent_update",
+        consent_state: state,
+        ad_storage: state,
+        analytics_storage: state,
+      });
+    };
+
+    const updateConsent = (state) => {
+      window.localStorage.setItem(storageKey, state);
+      pushConsent(state);
+      banner.remove();
+    };
+
+    const acceptBtn = banner.querySelector("[data-consent='accept']");
+    const rejectBtn = banner.querySelector("[data-consent='reject']");
+
+    acceptBtn?.addEventListener("click", () => updateConsent("granted"));
+    rejectBtn?.addEventListener("click", () => updateConsent("denied"));
+  })();
+</script>

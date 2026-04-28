@@ -1,0 +1,70 @@
+---
+import "../../styles/global.css";
+import ConsentBanner from "./ConsentBanner.astro";
+
+interface Props {
+  readonly title?: string;
+}
+
+const { title = "Estudio Kovia" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <title>{title}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap"
+    />
+
+    <!-- Google Tag Manager -->
+    <script>
+      (() => {
+        const w = window as unknown as Window & Record<string, unknown>;
+        const d = document;
+        const layerName = "dataLayer";
+        const gtmId = "GTM-TM88PJZ3";
+
+        if (!Array.isArray(w[layerName])) {
+          w[layerName] = [];
+        }
+
+        (w[layerName] as unknown[]).push({
+          "gtm.start": new Date().getTime(),
+          event: "gtm.js"
+        });
+
+        const firstScript = d.getElementsByTagName("script")[0];
+        const gtmScript = d.createElement("script");
+        gtmScript.async = true;
+        gtmScript.src = `https://www.googletagmanager.com/gtm.js?id=${gtmId}`;
+        firstScript?.parentNode?.insertBefore(gtmScript, firstScript);
+      })();
+    </script>
+    <!-- End Google Tag Manager -->
+
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-TM88PJZ3"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <slot />
+    <ConsentBanner />
+  </body>
+</html>

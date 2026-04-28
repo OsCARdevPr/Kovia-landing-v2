@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "skills": {
+    "astro": {
+      "source": "astrolicious/agent-skills",
+      "sourceType": "github",
+      "computedHash": "3a70f9666e7b6a03efb939b7e62938f4d3a6a5d956b2cc3c10011fda6ba27e9b"
+    },
+    "grill-me": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "grill-me/SKILL.md",
+      "computedHash": "daf64ca15f4fa081a6747766db538e2dbd1131725ed4fcdd3d538dc62c7035ba"
+    },
+    "react:components": {
+      "source": "google-labs-code/stitch-skills",
+      "sourceType": "github",
+      "computedHash": "5e786773a89012ae15b01b5c11942db30b09f935929283d8eb8a30b2da5fabf7"
+    }
+  }
+}

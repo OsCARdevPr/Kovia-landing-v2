@@ -1,0 +1,29 @@
+---
+interface Props {
+  readonly message: string;
+}
+
+const { message } = Astro.props;
+const repeatedMessages = Array(10).fill(message);
+---
+
+<div class="fixed top-0 w-full z-[100] bg-kovia-red text-white overflow-hidden py-1 hidden lg:block">
+  <div class="kv-marquee-track font-mono text-[10px] font-bold uppercase tracking-[0.2em]">
+    <div class="kv-marquee-content">
+      {repeatedMessages.map((entry) => (
+        <>
+          <span>{entry}</span>
+          <span class="opacity-40" aria-hidden="true">✦</span>
+        </>
+      ))}
+    </div>
+    <div class="kv-marquee-content" aria-hidden="true">
+      {repeatedMessages.map((entry) => (
+        <>
+          <span>{entry}</span>
+          <span class="opacity-40" aria-hidden="true">✦</span>
+        </>
+      ))}
+    </div>
+  </div>
+</div>
